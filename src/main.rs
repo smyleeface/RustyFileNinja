@@ -2,6 +2,7 @@ use std::io::{self};
 use std::str::FromStr;
 use std::env;
 
+use fini::create_file;
 
 #[derive(Debug)]
 pub enum Commands {
@@ -27,12 +28,13 @@ impl FromStr for Commands {
 
 fn main() -> io::Result<()> {
     let args: Vec<String> = env::args().collect();
-    if args.len() == 1 {
-        panic!("Command not provided");
-    }
-    let command = Commands::from_str(&args[1].as_str()).unwrap();
-    match command {
-        Commands::Create => println!("Commands::Create"),
+    let command = &args.get(1).expect("Command not provided");
+    let command_enum = Commands::from_str(command.as_str()).unwrap();
+    match command_enum {
+        Commands::Create => {
+            println!("Commands::Create");
+            create_file::run().expect("Error running create_file command");
+        },
         Commands::Copy => println!("Commands::Copy"),
         Commands::Combine => println!("Commands::Combine"),
         Commands::Delete => println!("Commands::Delete")

@@ -3,6 +3,10 @@ name = "file-ninja"
 version = "0.0.0"
 edition = "2021"
 
+[lib]
+name = "fini"
+path = "src/lib.rs"
+
 [[bin]]
 name = "fini"
 path = "src/main.rs"

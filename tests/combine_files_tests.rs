@@ -1,3 +1,5 @@
+mod common;
+
 use std::fs::{File};
 use std::io::{Write};
 
@@ -10,20 +12,13 @@ mod tests {
     use std::path::Path;
     use super::*;
 
-    // Create a file for the copy command
-    fn set_up(filename: String, content: String) -> io::Result<()> {
-        let file_path = Path::new(filename.as_str());
-        let mut output_file = File::create(file_path)?;
-        write!(output_file, "{}", content)
-    }
-
     #[test]
     fn test_combine_files() {
         // Arrange
         let filename_1 = String::from("foo_file_1");
-        set_up(filename_1.clone(), "abc".to_string()).unwrap();
+        common::setup(filename_1.clone(), "abc".to_string()).unwrap();
         let filename_2 = String::from("foo_file_2");
-        set_up(filename_2.clone(), "123".to_string()).unwrap();
+        common::setup(filename_2.clone(), "123".to_string()).unwrap();
         let destination = String::from("combined_foo_file");
 
         // Act

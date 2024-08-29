@@ -2,7 +2,7 @@ use std::io::{self};
 use std::str::FromStr;
 use std::env;
 
-use fini::{create_file, copy_file, delete_file};
+use fini::{create_file, copy_file, delete_file, combine_files};
 
 #[derive(Debug)]
 pub enum Commands {
@@ -39,7 +39,10 @@ fn main() -> io::Result<()> {
             println!("Commands::Copy");
             copy_file::run().expect("Error running copy_file command");
         },
-        Commands::Combine => println!("Commands::Combine"),
+        Commands::Combine => {
+            println!("Commands::Combine");
+            combine_files::run().expect("Error running combine_files command");
+        },
         Commands::Delete => {
             println!("Commands::Delete");
             delete_file::run().expect("Error running delete_file command");

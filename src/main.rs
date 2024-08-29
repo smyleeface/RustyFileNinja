@@ -3,6 +3,7 @@ use std::str::FromStr;
 use std::env;
 
 use fini::create_file;
+use fini::copy_file;
 
 #[derive(Debug)]
 pub enum Commands {
@@ -35,7 +36,10 @@ fn main() -> io::Result<()> {
             println!("Commands::Create");
             create_file::run().expect("Error running create_file command");
         },
-        Commands::Copy => println!("Commands::Copy"),
+        Commands::Copy => {
+            println!("Commands::Copy");
+            copy_file::run().expect("Error running copy_file command");
+        },
         Commands::Combine => println!("Commands::Combine"),
         Commands::Delete => println!("Commands::Delete")
     }

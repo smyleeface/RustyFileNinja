@@ -1,6 +1,6 @@
 use std::fs::File;
 use std::{fs, io};
-use std::io::Read;
+use std::io::{Read, Write};
 use std::path::Path;
 
 /// Read the file contents

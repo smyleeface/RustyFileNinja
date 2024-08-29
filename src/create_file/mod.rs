@@ -12,7 +12,7 @@ pub fn run() -> io::Result<()> {
 /// Returns the input provided by the user.
 fn prompt_input() -> io::Result<(String, String)> {
     let name_of_file = utils::prompt_for_required_value(String::from("\nName of file: "));
-    let content = utils::prompt_for_required_value(String::from("Content to write to the file: \n"));
+    let content = utils::prompt_for_value(String::from("Content to write to the file: \n"));
     Ok((name_of_file, content))
 }
 

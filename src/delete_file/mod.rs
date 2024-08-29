@@ -9,7 +9,7 @@ pub fn run() -> io::Result<()> {
 }
 
 /// Returns the input provided by the user.
-fn prompt_input() -> io::Result<(String)> {
+fn prompt_input() -> io::Result<String> {
     let name_of_file = utils::prompt_for_required_value(String::from("\nName of file: "));
     Ok(name_of_file)
 }

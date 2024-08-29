@@ -1,6 +1,6 @@
 pub(crate) mod file_io;
 
-use std::io::{stdin, stdout, Write, BufRead};
+use std::io::{stdin, stdout, Write};
 
 /// Returns an input provided by the user. Continues to prompt until a user enter a value.
 pub(crate) fn prompt_for_required_value(message_prompt: String) -> String {

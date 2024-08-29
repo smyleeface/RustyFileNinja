@@ -11,12 +11,15 @@ pub(crate) fn get_contents(file_to_read: String) -> String {
     file_data
 }
 
+/// Create a file given a name of file and content
 pub(crate) fn create_file(name_of_file: String, content: String) -> io::Result<()> {
     let file_path = Path::new(&name_of_file);
     let mut output_file = File::create(file_path)?;
     write!(output_file, "{}", content)?;
     Ok(())
 }
+
+/// Remove a file given a name
 
 pub(crate) fn remove_file(name_of_file: String) -> io::Result<()> {
     let file_path = Path::new(&name_of_file);

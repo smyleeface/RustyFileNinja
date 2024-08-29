@@ -1,12 +1,9 @@
 mod common;
 
-use std::io::{Write};
-
 use fini::delete_file;
 
 #[cfg(test)]
 mod tests {
-    use std::io;
     use std::path::Path;
     use super::*;
 

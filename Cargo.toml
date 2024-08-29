@@ -1,0 +1,8 @@
+[package]
+name = "file-ninja"
+version = "0.0.0"
+edition = "2021"
+
+[[bin]]
+name = "fini"
+path = "src/main.rs"

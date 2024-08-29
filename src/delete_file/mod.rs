@@ -18,8 +18,7 @@ fn prompt_input() -> io::Result<(String)> {
 
 /// Deletes a file given the filename
 pub fn delete_file(name_of_file: String) -> io::Result<()> {
-    let file_path = Path::new(&name_of_file);
-    fs::remove_file(file_path)?;
+    utils::file_io::remove_file(name_of_file.clone())?;
     println!("\nFile deleted {}", name_of_file);
     Ok(())
 }

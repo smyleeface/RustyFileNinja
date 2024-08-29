@@ -1,5 +1,5 @@
 use std::fs::File;
-use std::io;
+use std::{fs, io};
 use std::io::Read;
 use std::path::Path;
 
@@ -16,4 +16,9 @@ pub(crate) fn create_file(name_of_file: String, content: String) -> io::Result<(
     let mut output_file = File::create(file_path)?;
     write!(output_file, "{}", content)?;
     Ok(())
+}
+
+pub(crate) fn remove_file(name_of_file: String) -> io::Result<()> {
+    let file_path = Path::new(&name_of_file);
+    fs::remove_file(file_path)
 }

@@ -1,7 +1,4 @@
-use std::fs::{File};
-use std::io::{self, Write, Read};
-use std::path::Path;
-use crate::create_file::create_file;
+use std::io::{self};
 use crate::utils;
 
 /// Begins the combine file process.

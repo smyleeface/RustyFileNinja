@@ -1,6 +1,4 @@
-use std::fs::{self};
-use std::path::Path;
-use std::io::{self, stdin, stdout, Write};
+use std::io::{self};
 use crate::utils;
 
 /// Begins the delete file process.

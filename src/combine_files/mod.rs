@@ -1,7 +1,7 @@
 use std::fs::{File};
 use std::io::{self, Write, Read};
 use std::path::Path;
-
+use crate::create_file::create_file;
 use crate::utils;
 
 /// Begins the combine file process.
@@ -9,13 +9,6 @@ pub fn run() -> io::Result<()> {
     let inputs = prompt_input()?;
     combine_files(inputs.0, inputs.1, inputs.2)?;
     Ok(())
-}
-
-fn get_file_contents(file_to_read: String) -> String {
-    let mut file_data= String::new();
-    let mut file_client = File::open(file_to_read).unwrap();
-    file_client.read_to_string(&mut file_data).unwrap();
-    file_data
 }
 
 /// Returns the input provided by the user.
@@ -29,13 +22,11 @@ fn prompt_input() -> io::Result<(String, String, String)> {
 /// Creates a new file with the contents of two provided files
 pub fn combine_files(source_1: String, source_2: String, destination: String) -> io::Result<()> {
     let mut new_string = String::new();
-    let source_data_1 = get_file_contents(source_1);
-    let source_data_2= get_file_contents(source_2);
+    let source_data_1 = utils::file_io::get_contents(source_1);
+    let source_data_2= utils::file_io::get_contents(source_2);
     new_string.push_str(source_data_1.as_str());
     new_string.push_str(source_data_2.as_str());
-    let destination_path = Path::new(&destination);
-    let mut destination_file = File::create(destination_path)?;
-    write!(destination_file, "{}", new_string)?;
+    utils::file_io::create_file(destination.clone(), new_string)?;
     println!("\nFile created {}", destination);
     Ok(())
 }

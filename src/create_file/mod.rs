@@ -19,10 +19,8 @@ fn prompt_input() -> io::Result<(String, String)> {
 }
 
 /// Creates a file given the filename and content
-pub fn create_file(name_of_file: String, content: String) -> io::Result<()> {
-    let file_path = Path::new(&name_of_file);
-    let mut output_file = File::create(file_path)?;
-    write!(output_file, "{}", content)?;
+pub(crate) fn create_file(name_of_file: String, content: String) -> io::Result<()> {
+    utils::file_io::create_file(name_of_file.clone(), content)?;
     println!("\nFile created {}", name_of_file);
     Ok(())
 }

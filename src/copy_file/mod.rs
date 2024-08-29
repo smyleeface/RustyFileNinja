@@ -20,12 +20,8 @@ fn prompt_input() -> io::Result<(String, String)> {
 
 /// Copies a file to another location when given both the source and destination.
 pub fn copy_file(source_location: String, destination_location: String) -> io::Result<()> {
-    let mut source_content = String::new();
-    let source_path = Path::new(&source_location);
-    let mut source_file = File::open(source_path)?;
-    source_file.read_to_string(&mut source_content)?;
-    let mut destination_file = File::create(destination_location.clone())?;
-    write!(destination_file, "{}", source_content)?;
+    let source_content = utils::file_io::get_contents(source_location.clone());
+    utils::file_io::create_file(destination_location.clone(), source_content)?;
     println!("\nFile created {}", destination_location);
     Ok(())
 }

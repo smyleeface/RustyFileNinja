@@ -1,3 +1,5 @@
+pub(crate) mod file_io;
+
 use std::io::{stdin, stdout, Write, BufRead};
 
 /// Returns an input provided by the user. Continues to prompt until a user enter a value.

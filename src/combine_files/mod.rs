@@ -1,7 +1,8 @@
 use std::fs::{File};
-use std::io::{self, stdin, stdout, Write, BufRead, Read};
-use std::ops::Add;
+use std::io::{self, Write, Read};
 use std::path::Path;
+
+use crate::utils;
 
 /// Begins the combine file process.
 pub fn run() -> io::Result<()> {
@@ -17,22 +18,11 @@ fn get_file_contents(file_to_read: String) -> String {
     file_data
 }
 
-fn prompt_for_required_value(message_prompt: String) -> String {
-    let mut source_file = String::new();
-    while source_file.is_empty() {
-        print!("{}", message_prompt);
-        stdout().flush().unwrap();
-        stdin().read_line(&mut source_file).unwrap();
-        source_file = source_file.trim().to_string();
-    }
-    source_file
-}
-
 /// Returns the input provided by the user.
 fn prompt_input() -> io::Result<(String, String, String)> {
-    let source_file_1 = prompt_for_required_value(String::from("\nFirst File: "));
-    let source_file_2 = prompt_for_required_value(String::from("\nSecond File: "));
-    let destination_file = prompt_for_required_value(String::from("\nFile destination: "));
+    let source_file_1 = utils::prompt_for_required_value(String::from("\nFirst File: "));
+    let source_file_2 = utils::prompt_for_required_value(String::from("\nSecond File: "));
+    let destination_file = utils::prompt_for_required_value(String::from("\nFile destination: "));
     Ok((source_file_1, source_file_2, destination_file))
 }
 

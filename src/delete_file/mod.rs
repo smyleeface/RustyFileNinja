@@ -1,7 +1,7 @@
 use std::fs::{self};
 use std::path::Path;
 use std::io::{self, stdin, stdout, Write};
-
+use crate::utils;
 
 /// Begins the delete file process.
 pub fn run() -> io::Result<()> {
@@ -12,15 +12,7 @@ pub fn run() -> io::Result<()> {
 
 /// Returns the input provided by the user.
 fn prompt_input() -> io::Result<(String)> {
-
-    let mut name_of_file = String::new();
-    while name_of_file.is_empty() {
-        print!("\nName of file: ");
-        stdout().flush()?;
-        stdin().read_line(&mut name_of_file)?;
-        name_of_file = name_of_file.trim().to_string();
-    }
-
+    let name_of_file = utils::prompt_for_required_value(String::from("\nName of file: "));
     Ok(name_of_file)
 }
 

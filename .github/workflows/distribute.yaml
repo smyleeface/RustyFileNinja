@@ -30,7 +30,7 @@ jobs:
             exit 1
           fi
           ./target/release/fini version
-          ninja_version=$(./target/release/fini version)
+          echo "ninja_version=$(./target/release/fini version)" >> $GITHUB_ENV
       - name: Package FileNinja
         run: |
           runner_os=$(echo "${{runner.os}}" | awk '{print tolower($0)}')

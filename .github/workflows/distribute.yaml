@@ -48,7 +48,7 @@ jobs:
             /repos/${{ github.repository }}/releases \
             -f "tag_name=${ninja_version}" \
             -f "target_commitish=main" \
-            -f "name=v${ninja_version}" \
+            -f "name=${ninja_version}" \
             -f "body=." \
             -F "draft=true" \
             -F "prerelease=false" \

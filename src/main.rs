@@ -6,8 +6,11 @@ use std::env;
 
 fn main() -> io::Result<()> {
     let args: Vec<String> = env::args().collect();
-    let command = &args.get(1).expect("Command not provided");
-    let command_enum = commands::Commands::from_str(command.as_str()).unwrap();
+    let mut command= "help";
+    if args.len() > 1 {
+        command = args.get(1).unwrap();
+    }
+    let command_enum = commands::Commands::from_str(command).unwrap();
     command_enum.run();
     Ok(())
 }

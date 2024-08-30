@@ -1,13 +1,17 @@
 use std::str::FromStr;
-
+use strum::IntoEnumIterator;
+use strum_macros::{Display, EnumIter};
 use fini::{create_file, copy_file, delete_file, combine_files};
 
-#[derive(Debug)]
+#[derive(Debug, EnumIter, Display)]
+#[strum(serialize_all = "snake_case")]
 pub enum Commands {
     Create,
     Copy,
     Combine,
-    Delete
+    Delete,
+    Help,
+    Version
 }
 
 impl Commands {
@@ -29,6 +33,17 @@ impl Commands {
                 println!("Commands::Delete");
                 delete_file::run().expect("Error running delete_file command");
             }
+            Commands::Help => {
+                println!("Commands::Help");
+                println!("Please enter one of the following commands: \n");
+                for command in Commands::iter() {
+                    println!("{}", command)
+                }
+            }
+            Commands::Version => {
+                let version: &str = env!("CARGO_PKG_VERSION");
+                println!("v{}", version);
+            }
         }
     }
 }
@@ -42,7 +57,8 @@ impl FromStr for Commands {
             "copy" => Ok(Commands::Copy),
             "combine" => Ok(Commands::Combine),
             "delete" => Ok(Commands::Delete),
-            _ => panic!("Command not supported")
+            "version" => Ok(Commands::Version),
+            _ => Ok(Commands::Help)
         }
     }
 }

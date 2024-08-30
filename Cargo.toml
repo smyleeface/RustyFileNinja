@@ -10,3 +10,7 @@ path = "src/lib.rs"
 [[bin]]
 name = "fini"
 path = "src/main.rs"
+
+[dependencies]
+strum = "0.26"
+strum_macros = "0.26"

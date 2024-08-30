@@ -10,7 +10,8 @@ pub enum Commands {
     Copy,
     Combine,
     Delete,
-    Help
+    Help,
+    Version
 }
 
 impl Commands {
@@ -39,6 +40,10 @@ impl Commands {
                     println!("{}", command)
                 }
             }
+            Commands::Version => {
+                let version: &str = env!("CARGO_PKG_VERSION");
+                println!("v{}", version);
+            }
         }
     }
 }
@@ -52,6 +57,7 @@ impl FromStr for Commands {
             "copy" => Ok(Commands::Copy),
             "combine" => Ok(Commands::Combine),
             "delete" => Ok(Commands::Delete),
+            "version" => Ok(Commands::Version),
             _ => Ok(Commands::Help)
         }
     }

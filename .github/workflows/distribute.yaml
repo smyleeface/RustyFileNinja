@@ -46,7 +46,7 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             /repos/${{ github.repository }}/releases \
-            -f "tag_name=v${ninja_version}" \
+            -f "tag_name=${ninja_version}" \
             -f "target_commitish=main" \
             -f "name=v${ninja_version}" \
             -f "body=." \

@@ -37,7 +37,7 @@ jobs:
           runner_os=$(echo "${{runner.os}}" | awk '{print tolower($0)}')
           runner_arch=$(echo "${{runner.arch}}" | awk '{print tolower($0)}')
           release_filename="rusty_file_ninja_${ninja_version}_${runner_os}_${runner_arch}.tar.gz"
-          tar -czf $release_filename dist/fini
+          tar -czf $release_filename ./target/release/fini
           printf "FileNinja package: %s\n" $release_filename
           echo "release_filename=$release_filename" >> $GITHUB_ENV
       - name: Create Release

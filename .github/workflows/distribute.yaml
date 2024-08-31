@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ninja_version: ''
-      ninja_version_name: ''
       release_id: ''
       release_filename: ''
     steps:
@@ -30,13 +29,14 @@ jobs:
             exit 1
           fi
           ./target/release/file-ninja --version
-          echo "ninja_version_name=$(./target/release/file-ninja --version)" >> $GITHUB_ENV
-          echo "ninja_version=$(echo $ninja_version_name | awk '{print $1}')" >> $GITHUB_ENV
+          ninja_version_name=$(./target/release/file-ninja --version)
+          echo $ninja_version_name
+          echo "ninja_version=$(echo $ninja_version_name | awk '{print $2}')" >> $GITHUB_ENV
       - name: Package FileNinja
         run: |
           runner_os=$(echo "${{runner.os}}" | awk '{print tolower($0)}')
           runner_arch=$(echo "${{runner.arch}}" | awk '{print tolower($0)}')
-          release_filename="rusty_file_ninja_${ninja_version}_${runner_os}_${runner_arch}.tar.gz"
+          release_filename="rusty_file_ninja_v${ninja_version}_${runner_os}_${runner_arch}.tar.gz"
           tar -czf $release_filename ./target/release/file-ninja
           printf "FileNinja package: %s\n" $release_filename
           echo "release_filename=$release_filename" >> $GITHUB_ENV

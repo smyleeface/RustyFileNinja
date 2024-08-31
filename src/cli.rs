@@ -13,7 +13,7 @@ struct Cli {
 enum Commands {
     /// Creates a new file with or without content
     Create { name_of_file: Option<String>, content: Option<String> },
-    // Copies a file to another location when given both the source and destination
+    /// Copies a file to another location when given both the source and destination
     Copy { source_file: Option<String>, destination_location: Option<String> },
     /// Creates a new file with the contents of two provided files
     Combine { source_file_1: Option<String>, source_file_2: Option<String>, destination_file: Option<String> },

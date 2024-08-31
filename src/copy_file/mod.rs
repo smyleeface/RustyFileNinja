@@ -3,17 +3,11 @@ use std::io::{self};
 use crate::utils;
 
 /// Begins the copy file process.
-pub fn run() -> io::Result<()> {
-    let inputs = prompt_input()?;
-    copy_file(inputs.0, inputs.1)?;
+pub fn run(mut source_file: String, mut destination_location: String) -> io::Result<()> {
+    source_file = utils::prompt_input(source_file, String::from("\nFile source: "), true);
+    destination_location = utils::prompt_input(destination_location, String::from("\nFile destination: "), true);
+    copy_file(source_file, destination_location)?;
     Ok(())
-}
-
-/// Returns all the input provided by the user.
-fn prompt_input() -> io::Result<(String, String)> {
-    let source_file = utils::prompt_for_required_value(String::from("\nFile source: "));
-    let destination_file = utils::prompt_for_required_value(String::from("\nFile destination: "));
-    Ok((source_file, destination_file))
 }
 
 /// Copies a file to another location when given both the source and destination.

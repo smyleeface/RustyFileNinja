@@ -22,3 +22,15 @@ pub(crate) fn prompt_for_value(message_prompt: String) -> String {
     stdin().read_line(&mut content).unwrap();
     content
 }
+
+/// Returns the input provided by the user.
+pub(crate) fn prompt_input(value: String, prompt: String, required: bool) -> String {
+    if !value.is_empty() {
+        return value
+    }
+    if required {
+        prompt_for_required_value(String::from(prompt))
+    } else {
+        prompt_for_value(String::from(prompt))
+    }
+}

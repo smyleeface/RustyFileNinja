@@ -1,19 +1,12 @@
 use std::io::{self};
-
 use crate::utils;
 
 /// Begins the create file process.
-pub fn run() -> io::Result<()> {
-    let inputs = prompt_input()?;
-    create_file(inputs.0, inputs.1)?;
+pub fn run(mut name_of_file: String, mut content: String) -> io::Result<()> {
+    name_of_file = utils::prompt_input(name_of_file, String::from("\nName of file: "), true);
+    content = utils::prompt_input(content, String::from("Content to write to the file: \n"), false);
+    create_file(name_of_file, content)?;
     Ok(())
-}
-
-/// Returns the input provided by the user.
-fn prompt_input() -> io::Result<(String, String)> {
-    let name_of_file = utils::prompt_for_required_value(String::from("\nName of file: "));
-    let content = utils::prompt_for_value(String::from("Content to write to the file: \n"));
-    Ok((name_of_file, content))
 }
 
 /// Creates a file given the filename and content

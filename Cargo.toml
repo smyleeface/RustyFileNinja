@@ -1,6 +1,6 @@
 [package]
 name = "file-ninja"
-version = "0.0.0"
+version = "0.0.1"
 edition = "2021"
 
 [lib]
@@ -12,5 +12,6 @@ name = "fini"
 path = "src/main.rs"
 
 [dependencies]
+clap = { version = "4.5.16", features = ["derive"] }
 strum = "0.26"
 strum_macros = "0.26"

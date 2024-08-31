@@ -2,18 +2,12 @@ use std::io::{self};
 use crate::utils;
 
 /// Begins the combine file process.
-pub fn run() -> io::Result<()> {
-    let inputs = prompt_input()?;
-    combine_files(inputs.0, inputs.1, inputs.2)?;
+pub fn run(source_file_1: String, source_file_2: String, destination_file: String) -> io::Result<()> {
+    let source_file_1 = utils::prompt_input(source_file_1, String::from("\nFirst File: "), true);
+    let source_file_2 = utils::prompt_input(source_file_2, String::from("\nSecond File: "), true);
+    let destination_file = utils::prompt_input(destination_file, String::from("\nFile destination: "), true);
+    combine_files(source_file_1, source_file_2, destination_file)?;
     Ok(())
-}
-
-/// Returns the input provided by the user.
-fn prompt_input() -> io::Result<(String, String, String)> {
-    let source_file_1 = utils::prompt_for_required_value(String::from("\nFirst File: "));
-    let source_file_2 = utils::prompt_for_required_value(String::from("\nSecond File: "));
-    let destination_file = utils::prompt_for_required_value(String::from("\nFile destination: "));
-    Ok((source_file_1, source_file_2, destination_file))
 }
 
 /// Creates a new file with the contents of two provided files

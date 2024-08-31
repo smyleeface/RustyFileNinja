@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ninja_version: ''
+      ninja_version_name: ''
       release_id: ''
       release_filename: ''
     steps:
@@ -25,17 +26,18 @@ jobs:
           cargo build --release
       - name: Verify Build
         run: |
-          if ! ./target/release/fini --help; then
+          if ! ./target/release/file-ninja --help; then
             exit 1
           fi
-          ./target/release/fini version
-          echo "ninja_version=$(./target/release/fini version)" >> $GITHUB_ENV
+          ./target/release/file-ninja --version
+          echo "ninja_version_name=$(./target/release/file-ninja --version)" >> $GITHUB_ENV
+          echo "ninja_version=$(echo $ninja_version_name | awk '{print $2}')" >> $GITHUB_ENV
       - name: Package FileNinja
         run: |
           runner_os=$(echo "${{runner.os}}" | awk '{print tolower($0)}')
           runner_arch=$(echo "${{runner.arch}}" | awk '{print tolower($0)}')
           release_filename="rusty_file_ninja_${ninja_version}_${runner_os}_${runner_arch}.tar.gz"
-          tar -czf $release_filename ./target/release/fini
+          tar -czf $release_filename ./target/release/file-ninja
           printf "FileNinja package: %s\n" $release_filename
           echo "release_filename=$release_filename" >> $GITHUB_ENV
       - name: Create Release
@@ -47,7 +49,7 @@ jobs:
             /repos/${{ github.repository }}/releases \
             -f "tag_name=${ninja_version}" \
             -f "target_commitish=main" \
-            -f "name=${ninja_version}" \
+            -f "name=${ninja_version_name}" \
             -f "body=." \
             -F "draft=true" \
             -F "prerelease=false" \

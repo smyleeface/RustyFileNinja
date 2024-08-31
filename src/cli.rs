@@ -1,10 +1,10 @@
 use clap::{Parser, Subcommand};
-use fini::{create_file, copy_file, combine_files, delete_file};
+use crate::{create_file, copy_file, combine_files, delete_file, create_docs};
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
 #[command(propagate_version = true)]
-struct Cli {
+pub struct Cli {
     #[command(subcommand)]
     command: Commands,
 }
@@ -18,10 +18,12 @@ enum Commands {
     /// Creates a new file with the contents of two provided files
     Combine { source_file_1: Option<String>, source_file_2: Option<String>, destination_file: Option<String> },
     /// Deletes a file given the filename
-    Delete { name_of_file: Option<String> }
+    Delete { name_of_file: Option<String> },
+    /// Creates man docs for the cli tool
+    CreateDocs {}
 }
 
-pub(crate) fn main() {
+pub fn main() {
     let cli = Cli::parse();
     match &cli.command {
         Commands::Create { name_of_file, content } => {
@@ -51,6 +53,9 @@ pub(crate) fn main() {
                 name_of_file.clone().unwrap_or_else(|| "".to_string())
             )
             .expect("Error running combine_files command");
+        }
+        Commands::CreateDocs {} => {
+            create_docs::run().expect("Error running create-docs command");
         }
     }
 }

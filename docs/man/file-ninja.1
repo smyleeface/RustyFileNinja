@@ -1,0 +1,33 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH file-ninja 1  "file-ninja 0.0.1" 
+.SH NAME
+file\-ninja
+.SH SYNOPSIS
+\fBfile\-ninja\fR [\fB\-h\fR|\fB\-\-help\fR] [\fB\-V\fR|\fB\-\-version\fR] <\fIsubcommands\fR>
+.SH DESCRIPTION
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print version
+.SH SUBCOMMANDS
+.TP
+file\-ninja\-create(1)
+Creates a new file with or without content
+.TP
+file\-ninja\-copy(1)
+Copies a file to another location when given both the source and destination
+.TP
+file\-ninja\-combine(1)
+Creates a new file with the contents of two provided files
+.TP
+file\-ninja\-delete(1)
+Deletes a file given the filename
+.TP
+file\-ninja\-help(1)
+Print this message or the help of the given subcommand(s)
+.SH VERSION
+v0.0.1

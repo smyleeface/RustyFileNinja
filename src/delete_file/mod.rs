@@ -2,16 +2,10 @@ use std::io::{self};
 use crate::utils;
 
 /// Begins the delete file process.
-pub fn run() -> io::Result<()> {
-    let inputs = prompt_input()?;
-    delete_file(inputs)?;
+pub fn run(name_of_file: String) -> io::Result<()> {
+    let name_of_file = utils::prompt_input(name_of_file, String::from("\nName of file: "), true);
+    delete_file(name_of_file)?;
     Ok(())
-}
-
-/// Returns the input provided by the user.
-fn prompt_input() -> io::Result<String> {
-    let name_of_file = utils::prompt_for_required_value(String::from("\nName of file: "));
-    Ok(name_of_file)
 }
 
 /// Deletes a file given the filename

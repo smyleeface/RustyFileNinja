@@ -34,15 +34,29 @@ Options:
 ## Development
 
 * Clone repo
-* run `cargo build` to build
-* run `cargo run <COMMAND>` or `./target/debug/file-ninja <COMMAND>` to run application
+* From the repo root run `cargo build` to build
+* From the repo root run `cargo run <COMMAND>` -or- `./target/debug/file-ninja <COMMAND>` to run application
 
 ### Adding new commands
 
-Add new commands to the `cli.rs` file and import the command it should run.
+Add new commands to the `src/cli.rs` file and import the command it should run.
 
 ### Running Tests
 
+From the repo root run:
+
 ```
 cargo test
+```
+
+### Updating man docs
+
+From the repo root run:
+
+```
+cargo run create-docs
+```
+-OR-
+```
+file-ninja create-docs
 ```

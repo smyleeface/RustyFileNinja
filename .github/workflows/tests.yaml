@@ -1,4 +1,4 @@
-name: Build, Test, Draft Release
+name: Tests
 run-name: ${{ github.actor }} is building RustyFileNinja
 
 on: [push]

@@ -8,10 +8,11 @@ name = "fini"
 path = "src/lib.rs"
 
 [[bin]]
-name = "fini"
+name = "file-ninja"
 path = "src/main.rs"
 
 [dependencies]
 clap = { version = "4.5.16", features = ["derive"] }
 strum = "0.26"
 strum_macros = "0.26"
+clap_mangen = "0.2.23"

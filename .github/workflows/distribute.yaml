@@ -31,7 +31,7 @@ jobs:
           fi
           ./target/release/file-ninja --version
           echo "ninja_version_name=$(./target/release/file-ninja --version)" >> $GITHUB_ENV
-          echo "ninja_version=$(echo $ninja_version_name | awk '{print $2}')" >> $GITHUB_ENV
+          echo "ninja_version=$(echo $ninja_version_name | awk '{print $1}')" >> $GITHUB_ENV
       - name: Package FileNinja
         run: |
           runner_os=$(echo "${{runner.os}}" | awk '{print tolower($0)}')
@@ -47,9 +47,9 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             /repos/${{ github.repository }}/releases \
-            -f "tag_name=${ninja_version}" \
+            -f "tag_name=v${ninja_version}" \
             -f "target_commitish=main" \
-            -f "name=${ninja_version_name}" \
+            -f "name=file-ninja v${ninja_version}" \
             -f "body=." \
             -F "draft=true" \
             -F "prerelease=false" \

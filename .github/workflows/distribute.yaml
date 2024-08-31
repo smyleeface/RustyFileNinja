@@ -1,10 +1,12 @@
 name: Build, Draft Release
 run-name: ${{ github.actor }} is building RustyFileNinja
 
-on:
-  push:
-    branches:
-      - main
+on: push
+
+#on:
+#  push:
+#    branches:
+#      - main
 
 jobs:
   Build:
@@ -22,14 +24,15 @@ jobs:
           cargo test
       - name: Build FileNinja
         run: |
-          cargo build --release
+          mkdir ./target/file-ninja
+          cargo build --release --target-dir ./target/file-ninja
       - name: Verify Build
         run: |
-          if ! ./target/release/file-ninja --help; then
+          if ! ./target/file-ninja/release/file-ninja --help; then
             exit 1
           fi
-          ./target/release/file-ninja --version
-          ninja_version_name=$(./target/release/file-ninja --version)
+          ./target/file-ninja/release/file-ninja --version
+          ninja_version_name=$(./target/file-ninja/release/file-ninja --version)
           echo $ninja_version_name
           echo "ninja_version=$(echo $ninja_version_name | awk '{print $2}')" >> $GITHUB_ENV
       - name: Package FileNinja
@@ -37,7 +40,8 @@ jobs:
           runner_os=$(echo "${{runner.os}}" | awk '{print tolower($0)}')
           runner_arch=$(echo "${{runner.arch}}" | awk '{print tolower($0)}')
           release_filename="rusty_file_ninja_v${ninja_version}_${runner_os}_${runner_arch}.tar.gz"
-          tar -czf $release_filename ./target/release/file-ninja
+          cd ./target
+          tar -czf $release_filename ./file-ninja
           printf "FileNinja package: %s\n" $release_filename
           echo "release_filename=$release_filename" >> $GITHUB_ENV
       - name: Create Release

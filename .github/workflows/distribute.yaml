@@ -9,7 +9,20 @@ on: [push]
 #      - main
 
 jobs:
+  Test:
+    runs-on: ubuntu-latest
+    env:
+      ninja_version: ''
+      release_id: ''
+      release_filename: ''
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Test FileNinja
+        run: |
+          cargo test
   Build:
+    name: Build and Release
     runs-on: ubuntu-latest
     env:
       ninja_version: ''

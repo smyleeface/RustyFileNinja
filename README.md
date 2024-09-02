@@ -9,7 +9,22 @@ This is a simple file manager written in [Rust](https://www.rust-lang.org/) that
 
 ## Installation
 
-TODO
+### Pre-requisites:
+
+* `wget` -or- `curl`
+
+### Install App 
+
+Depending on if you prefer `wget` or `curl`, run one of the commands below to download the app:
+
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/smyleeface/RustyFileNinja/install/install.sh)"
+```
+```
+sh -c "$(wget https://raw.githubusercontent.com/smyleeface/RustyFileNinja/install/install.sh -O -)"
+```
+
+Follow the on-screen instructions to finish the setup. 
 
 ## Usage
 

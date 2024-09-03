@@ -1,6 +1,7 @@
 pub(crate) mod file_io;
 
 use std::io::{stdin, stdout, Write};
+use crate::utils;
 
 /// Returns an input provided by the user. Continues to prompt until a user enter a value.
 pub(crate) fn prompt_for_required_value(message_prompt: String) -> String {
@@ -33,4 +34,15 @@ pub(crate) fn prompt_input(value: String, prompt: String, required: bool) -> Str
     } else {
         prompt_for_value(String::from(prompt))
     }
+}
+
+pub fn prompt_to_overwrite(name_of_file: String) -> bool {
+    if file_io::file_exists(name_of_file) {
+        let mut overwrite_ok = String::new();
+        overwrite_ok = utils::prompt_input(overwrite_ok, String::from("\nFile exists. Overwrite (Y/y)?  "), true);
+        if overwrite_ok != "Y" && overwrite_ok != "y" {
+            return false;
+        }
+    }
+    true
 }

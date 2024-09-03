@@ -1,11 +1,14 @@
 use std::io::{self};
-
+use std::process::exit;
 use crate::utils;
 
 /// Begins the copy file process.
 pub fn run(mut source_file: String, mut destination_location: String) -> io::Result<()> {
     source_file = utils::prompt_input(source_file, String::from("\nFile source: "), true);
     destination_location = utils::prompt_input(destination_location, String::from("\nFile destination: "), true);
+    if !utils::prompt_to_overwrite(destination_location.clone()) {
+        exit(0)
+    }
     copy_file(source_file, destination_location)?;
     Ok(())
 }

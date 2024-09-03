@@ -25,3 +25,8 @@ pub(crate) fn remove_file(name_of_file: String) -> io::Result<()> {
     let file_path = Path::new(&name_of_file);
     fs::remove_file(file_path)
 }
+
+pub(crate) fn file_exists(name_of_file: String) -> bool {
+    let file_path = Path::new(&name_of_file);
+    Path::exists(file_path)
+}

@@ -109,7 +109,7 @@ checksum = "d3fd119d74b830634cea2a0f58bbd0d54540518a14397557951e79340abc28c0"
 
 [[package]]
 name = "file-ninja"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "clap",
  "clap_mangen",

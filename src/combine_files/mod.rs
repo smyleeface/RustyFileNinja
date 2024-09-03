@@ -1,11 +1,17 @@
 use std::io::{self};
+use std::process::exit;
 use crate::utils;
 
 /// Begins the combine file process.
 pub fn run(source_file_1: String, source_file_2: String, destination_file: String) -> io::Result<()> {
-    let source_file_1 = utils::prompt_input(source_file_1, String::from("\nFirst File: "), true);
-    let source_file_2 = utils::prompt_input(source_file_2, String::from("\nSecond File: "), true);
+    let mut source_file_1 = utils::prompt_input(source_file_1, String::from("\nFirst File: "), true);
+    source_file_1 = utils::prompt_for_new_location(source_file_1, String::from("\nFirst File: "));
+    let mut source_file_2 = utils::prompt_input(source_file_2, String::from("\nSecond File: "), true);
+    source_file_2 = utils::prompt_for_new_location(source_file_2, String::from("\nSecond File: "));
     let destination_file = utils::prompt_input(destination_file, String::from("\nFile destination: "), true);
+    if !utils::prompt_to_overwrite(destination_file.clone()) {
+        exit(0)
+    }
     combine_files(source_file_1, source_file_2, destination_file)?;
     Ok(())
 }

@@ -14,6 +14,7 @@ pub(crate) fn get_contents(file_to_read: String) -> String {
 /// Create a file given a name of file and content
 pub(crate) fn create_file(name_of_file: String, content: String) -> io::Result<()> {
     let file_path = Path::new(&name_of_file);
+    create_directories(file_path)?;
     let mut output_file = File::create(file_path)?;
     write!(output_file, "{}", content)?;
     Ok(())
@@ -24,4 +25,15 @@ pub(crate) fn create_file(name_of_file: String, content: String) -> io::Result<(
 pub(crate) fn remove_file(name_of_file: String) -> io::Result<()> {
     let file_path = Path::new(&name_of_file);
     fs::remove_file(file_path)
+}
+
+pub(crate) fn file_exists(name_of_file: String) -> bool {
+    let file_path = Path::new(&name_of_file);
+    Path::exists(file_path)
+}
+
+pub(crate) fn create_directories(file_path: &Path) -> io::Result<()> {
+    let parent = file_path.parent();
+    fs::create_dir_all(parent.unwrap())?;
+    Ok(())
 }

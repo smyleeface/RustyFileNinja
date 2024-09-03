@@ -24,6 +24,17 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/smyleeface/RustyFileNinja/
 sh -c "$(wget https://raw.githubusercontent.com/smyleeface/RustyFileNinja/main/install.sh -O -)"
 ```
 
+### Uninstall App 
+
+Depending on if you prefer `wget` or `curl`, run one of the commands below to download the app:
+
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/smyleeface/RustyFileNinja/main/uninstall.sh)"
+```
+```
+sh -c "$(wget https://raw.githubusercontent.com/smyleeface/RustyFileNinja/main/uninstall.sh -O -)"
+```
+
 Follow the on-screen instructions to finish the setup. 
 
 ## Usage
